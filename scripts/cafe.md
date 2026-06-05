@@ -1,6 +1,5 @@
 ---
 title: Gene Family Contraction and Expansion with OrthoFinder and CAFE - step by step instructions
-tags: [scripts, project_tyd]
 
 ---
 
