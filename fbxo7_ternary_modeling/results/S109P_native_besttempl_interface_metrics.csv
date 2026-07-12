@@ -1,0 +1,5 @@
+sample,interface,label,dG_separated,ddG,dSASA_int_A2,delta_unsatHbonds,packstat,nres_int,pdb_file
+WT,A_B,FBXO7-PINK1,-138.9782870423087,0.0,6851.2953000187,76,0.4582523953737074,256,/work/pi_tlama_smith_edu/rosetta/results/WT_relaxed_best.pdb
+WT,A_C,FBXO7-PSMF1,-196.95754718310332,0.0,8408.355389151195,61,0.4758262093756667,297,/work/pi_tlama_smith_edu/rosetta/results/WT_relaxed_best.pdb
+S109P_native_besttempl,A_B,FBXO7-PINK1,-140.07017609173522,-1.091889049426527,7016.870481851167,68,0.4768153449225938,256,./S109P_native_besttempl_relaxed_best.pdb
+S109P_native_besttempl,A_C,FBXO7-PSMF1,-190.2226003484168,6.734946834686525,8444.634881208774,78,0.441136493896375,300,./S109P_native_besttempl_relaxed_best.pdb
