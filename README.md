@@ -1,11 +1,11 @@
 # project_bat1k_longevity
 
-Comparative multi-omics of bat lifespan evolution, supporting the manuscript
+Workflows supporting the manuscript
 *"Bat adaptations in mitochondrial damage recognition revealed through comparative multi-omics."*
 
 ## Overview
 
-Genome annotations for 23 bat and 7 non-bat species (generated with TOGA1) are used to
+Genome assemblies and annotations for 23 bat and 7 non-bat species are used to
 test which genes and gene families show signatures of adaptation associated with the
 hallmarks of aging. The repository collects the analysis pipelines and the structural
 modeling of bat-specific FBXO7 variants.
