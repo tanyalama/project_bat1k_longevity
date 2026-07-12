@@ -22,6 +22,7 @@ documenting objective, inputs, pipeline steps, outputs, and the scripts alongsid
 | Signatures of selection | HyPhy (aBSREL, MEME, RELAX, BGM) | [`analyses/hyphy/`](analyses/hyphy/) |
 | Comparative transcriptomics | EVE (Expression Variance and Evolution) | [`analyses/eve/`](analyses/eve/) |
 | FBXO7–PINK1–PSMF1 variant modeling | Boltz-2 + PyRosetta ΔΔG | [`analyses/fbxo7_ternary_modeling/`](analyses/fbxo7_ternary_modeling/) |
+| Western blot quantification | Welch *t*-tests + ggplot2 boxplots | [`analyses/western_blots/`](analyses/western_blots/) |
 | Branch length vs. genes under selection | Negative binomial regression | [count2branches](https://github.com/lmdavalos/count2branches) |
 
 ## Repository layout
@@ -33,6 +34,7 @@ analyses/
   hyphy/                    Signatures of selection (HyPhy)
   eve/                      Comparative transcriptomics (EVE)
   fbxo7_ternary_modeling/   Structural modeling of bat FBXO7 variants
+  western_blots/            Western blot densitometry (mouse vs. Myotis bat)
 ```
 
 Each analysis folder contains a `README.md` and the scripts referenced in it.
