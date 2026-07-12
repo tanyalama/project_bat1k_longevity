@@ -1,5 +1,7 @@
 # project_bat1k_longevity
 
+Compiled by Tanya M. Lama (tlama@smith.edu)
+
 Workflows supporting the manuscript
 *"Bat adaptations in mitochondrial damage recognition revealed through comparative multi-omics."*
 
