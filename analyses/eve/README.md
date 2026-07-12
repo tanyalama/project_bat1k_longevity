@@ -53,10 +53,12 @@ the eight species used here.
      -f BSThetaTestLRTs_6443_longevity.res -s 8 -g longevity_genelist.txt -o result
    ```
 
-3. **Significance & follow-up** (manuscript): a likelihood-ratio test per gene with a
-   Bonferroni correction (p_adj < 0.05) identifies candidate genes with a *Myotis*-specific
-   shift; a dropout test (removing bat expression data) validates lineage specificity; and
-   candidate gene sets are annotated for KEGG / GO pathways with DAVID.
+3. **Significance & candidate genes** — [`eve_branchshift_significance.R`](scripts/eve_branchshift_significance.R)
+   converts each gene's branch-shift LRT statistic to a p-value under the chi-square null
+   (df = 1), applies a Bonferroni correction (p_adj < 0.05), and writes the significant-gene
+   list (`result_6443_longevity_sig`) — the set reported in the manuscript. Downstream: a
+   dropout test (removing bat expression data) validates lineage specificity, and candidate
+   gene sets are annotated for KEGG / GO pathways with DAVID.
 
 ## Outputs (`results/`)
 
@@ -68,6 +70,15 @@ the eight species used here.
 | `twoBSThetaMLparams_6443_longevity.res` | Maximum-likelihood parameter estimates, two-θ branch-shift model |
 | `BSThetaTestLRTs_6443_longevity.res` | Per-gene likelihood-ratio test statistics (H₀ vs. H₁) |
 | `result` | Converted per-gene table: gene symbol ⇥ branch-shift LRT |
+
+## Visualization
+
+- [`eve_branchshift_significance.R`](scripts/eve_branchshift_significance.R) - converts the
+  branch-shift LRT statistics to Bonferroni-corrected p-values and extracts the
+  significant-gene list, with an empirical-CDF diagnostic of the LRT distribution.
+- [`eve_tpm_dotplot.R`](scripts/eve_tpm_dotplot.R) - per-gene TPM dot plots across the
+  comparative species panel (*Myotis* fibroblasts highlighted), for genes of interest
+  emerging from the EVE screen.
 
 ## Software
 
