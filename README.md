@@ -22,7 +22,6 @@ documenting objective, inputs, pipeline steps, outputs, and the scripts alongsid
 | Signatures of selection | HyPhy (aBSREL, MEME, RELAX, BGM) | [`analyses/hyphy/`](analyses/hyphy/) |
 | Comparative transcriptomics | EVE (Expression Variance and Evolution) | [`analyses/eve/`](analyses/eve/) |
 | FBXO7–PINK1–PSMF1 variant modeling | Boltz-2 + PyRosetta ΔΔG | [`analyses/fbxo7_ternary_modeling/`](analyses/fbxo7_ternary_modeling/) |
-| Gene enrichment | gprofiler2, NIH DAVID | — |
 | Branch length vs. genes under selection | Negative binomial regression | [count2branches](https://github.com/lmdavalos/count2branches) |
 
 ## Repository layout
