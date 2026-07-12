@@ -12,23 +12,26 @@ modeling of bat-specific FBXO7 variants.
 
 ## Analyses
 
+Each analysis lives in its own subfolder under [`analyses/`](analyses/), with a README
+documenting objective, inputs, pipeline steps, outputs, and the scripts alongside it.
+
 | Analysis | Method | Documentation |
 |---|---|---|
-| Gene family expansion / contraction | OrthoFinder + CAFE5 | [`scripts/cafe.md`](scripts/cafe.md) |
-| Annotation completeness (BUSCO) | compleasm | [`scripts/compleasm.md`](scripts/compleasm.md) |
-| Signatures of selection | HyPhy (aBSREL, MEME, RELAX, BGM) | [`scripts/hyphy_tools.md`](scripts/hyphy_tools.md) |
+| Gene family expansion / contraction | OrthoFinder + CAFE5 | [`analyses/cafe/`](analyses/cafe/) |
+| Annotation completeness (BUSCO) | compleasm | [`analyses/compleasm/`](analyses/compleasm/) |
+| Signatures of selection | HyPhy (aBSREL, MEME, RELAX, BGM) | [`analyses/hyphy/`](analyses/hyphy/) |
+| FBXO7–PINK1–PSMF1 variant modeling | Boltz-2 + PyRosetta ΔΔG | [`analyses/fbxo7_ternary_modeling/`](analyses/fbxo7_ternary_modeling/) |
 | Gene enrichment | gprofiler2, NIH DAVID | — |
 | Branch length vs. genes under selection | Negative binomial regression | [count2branches](https://github.com/lmdavalos/count2branches) |
-| FBXO7–PINK1–PSMF1 variant modeling | Boltz-2 + PyRosetta ΔΔG | [`fbxo7_ternary_modeling/`](fbxo7_ternary_modeling/) |
 
 ## Repository layout
 
 ```
-scripts/            Analysis walkthroughs (CAFE, compleasm, HyPhy)
-fbxo7_ternary_modeling/
-                    Structural modeling of bat FBXO7 variants (see its own README)
+analyses/
+  cafe/                     Gene family expansion / contraction (OrthoFinder + CAFE5)
+  compleasm/                Annotation completeness (compleasm / BUSCO)
+  hyphy/                    Signatures of selection (HyPhy)
+  fbxo7_ternary_modeling/   Structural modeling of bat FBXO7 variants
 ```
 
-Each `scripts/*.md` documents the objective, inputs, pipeline steps, and outputs for one
-analysis. Full scripts referenced in the walkthroughs are added to the repository alongside
-their documentation.
+Each analysis folder contains a `README.md` and the scripts referenced in it.

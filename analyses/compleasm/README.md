@@ -36,7 +36,7 @@ Thanks to Bill Thomas for suggesting compleasm.
 
 ## Scripts
 
-Scripts live in [`compleasm/`](compleasm/):
+Scripts live in [`compleasm/`]():
 
 - `compleasm_array.sh` — SLURM array running compleasm (one task per species)
 - `compleasm_summarize_plot.R` — parse logs into a stats table and plot completeness bars

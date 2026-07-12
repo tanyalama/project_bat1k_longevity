@@ -23,17 +23,17 @@ All analyses use `--srv Yes` (site-to-site synonymous rate variation).
 2. **Build the species tree.** Concatenate gene alignments with FASconCAT-G, then run
    IQ-TREE (partitioned, `-B 1000`) to select models and estimate the phylogeny. Reroot and
    drop bootstraps → `supermatrix_partition_iqtree_reroot_no_bootstraps.tree`.
-   *([`fasconcat.sh`](hyphy/fasconcat.sh), [`slurm_iqtree.sh`](hyphy/slurm_iqtree.sh))*
+   *([`fasconcat.sh`](fasconcat.sh), [`slurm_iqtree.sh`](slurm_iqtree.sh))*
 3. **Clip trees per gene.** Because not every gene is present in every species, prune the
    species tree to each gene's taxa → one `.tfl` tree per gene.
-   *([`modclip.py`](hyphy/modclip.py), [`cliptrees.R`](hyphy/cliptrees.R))*
+   *([`modclip.py`](modclip.py), [`cliptrees.R`](cliptrees.R))*
 4. **Tag foreground branches** with `{FG}` for branch-specific tests.
 5. **Run aBSREL** as SLURM array jobs, batched at ≤1500 genes each (`--branches FG`).
-   *([`template_slurm_absrel_array.sh`](hyphy/template_slurm_absrel_array.sh))*
+   *([`template_slurm_absrel_array.sh`](template_slurm_absrel_array.sh))*
 6. **Run MEME** on genes with significant aBSREL results.
-   *([`slurm_meme_array.sh`](hyphy/slurm_meme_array.sh))*
+   *([`slurm_meme_array.sh`](slurm_meme_array.sh))*
 7. **Run RELAX** with test (`FG1`) vs. reference (`FG2`) branch sets.
-   *([`slurm_relax_array1.sh`](hyphy/slurm_relax_array1.sh))*
+   *([`slurm_relax_array1.sh`](slurm_relax_array1.sh))*
 8. **Parse results** — extract gene ID and p-value per test; collect genes with positive
    selection signal.
 
@@ -57,7 +57,7 @@ All analyses use `--srv Yes` (site-to-site synonymous rate variation).
 
 ## Scripts
 
-Scripts live in [`hyphy/`](hyphy/):
+Scripts live in [`hyphy/`]():
 
 - **Tree building** — `fasconcat.sh`, `slurm_iqtree.sh`
 - **Per-gene tree clipping** — `modclip.py`, `cliptrees.R`
