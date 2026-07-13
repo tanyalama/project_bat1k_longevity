@@ -29,6 +29,15 @@ import matplotlib as mpl
 import matplotlib.pyplot as plt
 from matplotlib.colors import LinearSegmentedColormap, Normalize
 
+# Publication font: Arial for all text (falls back gracefully if unavailable).
+mpl.rcParams["font.family"] = "sans-serif"
+mpl.rcParams["font.sans-serif"] = ["Arial", "Helvetica", "Liberation Sans",
+                                   "Arimo", "DejaVu Sans"]
+mpl.rcParams["mathtext.fontset"] = "custom"
+mpl.rcParams["mathtext.rm"] = "Arial"
+mpl.rcParams["mathtext.it"] = "Arial:italic"
+mpl.rcParams["axes.unicode_minus"] = False
+
 # ----------------------------------------------------------------------
 NOISE_REU = 2.0     # InterfaceAnalyzer noise floor: |ddG| <= this -> white
 LIM_REU   = 21.0    # symmetric color limit (covers max |ddG| in the table)
