@@ -1,0 +1,19 @@
+variant_or_species,group,dGbind_WT_FBXO7_PINK1,dGbind_mut_FBXO7_PINK1,ddG_FBXO7_PINK1,dGbind_WT_FBXO7_PSMF1,dGbind_mut_FBXO7_PSMF1,ddG_FBXO7_PSMF1
+S109P,PINK1 binding domain,-171.47,-175.47,-4.0,-276.19,-276.19,0.0
+S110H,PINK1 binding domain,-171.47,-172.69,-1.22,-276.19,-276.19,0.0
+S110C,PINK1 binding domain,-171.47,-172.72,-1.25,-276.19,-276.19,0.0
+Q127E,PINK1 binding domain,-171.47,-171.68,-0.21,-276.19,-276.19,0.0
+D191G,PSMF1 binding domain,-171.47,-166.89,4.58,-276.19,-276.19,0.0
+L290P,PSMF1 binding domain,-171.47,-171.47,0.0,-276.19,-276.19,0.0
+E292R,PSMF1 binding domain,-171.47,-171.47,0.0,-276.19,-276.19,0.0
+T19E,Other FBXO7 sites,-171.47,-171.47,0.0,-276.19,-276.19,0.0
+T47A,Other FBXO7 sites,-171.47,-171.47,0.0,-276.19,-276.19,0.0
+T47E,Other FBXO7 sites,-171.47,-171.47,0.0,-276.19,-276.19,0.0
+A64T,Other FBXO7 sites,-171.47,-171.47,0.0,-276.19,-276.19,0.0
+F146V,Other FBXO7 sites,-171.47,-171.47,0.0,-276.19,-276.19,0.0
+G409R,Other FBXO7 sites,-171.47,-171.47,0.0,-276.19,-276.19,0.0
+G409I,Other FBXO7 sites,-171.47,-171.47,0.0,-276.19,-276.19,0.0
+Myotis_myotis,Species site-set,-171.47,-175.68,-4.21,-276.19,-276.19,0.0
+Myotis_nigricans,Species site-set,-171.47,-175.68,-4.21,-276.19,-276.19,0.0
+Desmodus_rotundus,Species site-set,-171.47,-172.06,-0.59,-276.19,-276.19,0.0
+Diphylla_ecaudata,Species site-set,-171.47,-176.68,-5.21,-276.19,-276.19,0.0
