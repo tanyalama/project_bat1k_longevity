@@ -1,84 +1,102 @@
 # Mitophagy pathway log2 fold-change visualization (hsa04137)
 
-Visualizes RNA-seq log2 fold changes on the KEGG **Mitophagy – animal**
-pathway (`hsa04137`) using [`pathview`](https://bioconductor.org/packages/pathview/),
-with a viridis color scale (purple = downregulated, yellow = upregulated).
+Overlays *Myotis myotis* vs *Mus musculus* fibroblast RNA-seq log2 fold changes
+on the KEGG **Mitophagy – animal** pathway (`hsa04137`) with a **viridis**
+colour scale: purple = downregulated, teal = 0, green → yellow = upregulated.
+
+Version 2 (2026-10). Replaces the pathview/R rendering (v1) with a
+dependency-light Python script that reproduces pathview's native-KEGG
+rendering step without Bioconductor annotation packages.
 
 ## Contents
 
 ```
-mitophagy_pathway_lfc/
+dge/
 ├── scripts/
-│   ├── mitophagy_pathview.R   # renders the pathway diagram colored by log2FC
-│   ├── sig_genes_table.R      # builds the gene-level significant-gene table
-│   └── make_legend.py         # renders the standalone color-scale legend
+│   ├── mitophagy_kegg_overlay.py   # v2: fetches KGML + PNG from KEGG REST, recolours gene boxes,
+│   │                               #     writes figure, legend and tables (run this)
+│   ├── mitophagy_pathview.R        # v1 (superseded): pathview rendering, asymmetric scale
+│   ├── sig_genes_table.R           # v1 (superseded): gene table for the pathview figure
+│   └── make_legend.py              # v1 (superseded): standalone legend for the pathview figure
 ├── data/
-│   ├── fc_data.tsv            # input: Entrez gene ID + log2fc (tab-separated)
-│   └── sig_genes_table.csv    # output: significant genes + symbol + HEX color
+│   ├── fc_data.tsv                 # input: Entrez gene ID + log2fc (tab-separated, 87 genes)
+│   ├── sig_genes_table.csv         # output: 11 significant genes + symbol + HEX colour
+│   └── node_table.csv              # output: one row per KEGG gene box (77) — members, driver, colour
+├── kegg/                           # cached KEGG downloads (hsa04137.xml, hsa04137.png, hsa_genes.tsv)
 └── figures/
-    ├── hsa04137.log2fc.png    # the colored pathway diagram
-    └── legend.png             # standalone Arial legend
+    ├── hsa04137.log2fc.viridis.pdf # the coloured pathway (vector boxes/text over the KEGG raster)
+    ├── hsa04137.log2fc.viridis.png # same, 300 dpi
+    ├── legend.pdf / legend.png     # standalone colour key (Arial)
+    └── hsa04137.log2fc.png         # v1 figure (superseded; asymmetric scale, teal midpoint at +3)
 ```
 
 ## Method
 
 1. **Input** (`data/fc_data.tsv`): one row per gene, `<Entrez ID>\t<log2fc>`.
-   Genes with `NA` values are treated as non-significant.
-2. **Coloring** (`scripts/mitophagy_pathview.R`):
-   - Viridis anchors — low `#440154` (purple) → mid `#21908C` (teal) →
-     high `#FDE725` (yellow).
-   - **Significance threshold**: genes with `|log2FC| < sig_thresh` (default 2)
-     are grayed out (`gray80`), as are genes with no value.
-   - **Color scale**: `scale_mode = "asymmetric"` uses the data's true min/max
-     (here −7.08 to +13.08); `"symmetric"` uses `± limit_abs` with 0 at the
-     teal midpoint.
-   - A gray "not significant" swatch is stamped onto the legend as a
-     post-processing step (pathview's native key has no NA slot).
-3. **Legend** (`scripts/make_legend.py`): standalone key matching the diagram,
-   all text in Arial ≥ 8 pt, titled "log fold change".
+   `NA` values are treated as not measured.
+2. **KEGG map**: `hsa04137` KGML and base PNG are fetched from
+   `rest.kegg.jp` (cached in `kegg/`). Each KGML `gene` entry gives a box
+   position and the Entrez IDs it collapses (77 boxes, 105 Entrez IDs; 84 of
+   the 87 input genes are on the map).
+3. **Significance threshold**: genes with `|log2FC| < 2` are not significant
+   and rendered grey (`#CCCCCC`), as are unmeasured genes.
+4. **Box colouring**: a box is coloured by the significant member with the
+   largest |log2FC| (its *driver*) and **labelled with the driver's symbol**,
+   so the label on a coloured box always names the gene carrying the signal.
+   In this dataset no box has more than one significant member, so the
+   aggregation rule never has to arbitrate. Uncoloured boxes are labelled
+   with the first member that has an HGNC symbol.
+5. **Colour scale**: matplotlib `viridis`, **symmetric and centred on 0**
+   (`±7`, clamped). 0 is the teal midpoint, so every significant up-gene lands
+   in the green→yellow half and every down-gene in the purple half. Three
+   values exceed the limit and are clamped to the end colours: CALCOCO2
+   (+13.08), NLRX1 (+10.56) → yellow; RAB7B (−7.08) → purple. The in-figure
+   key and `figures/legend.*` mark the ends as `≤ −7` / `≥ 7`.
+6. **Typography**: Arial for all overlaid text; PDF text is embedded as
+   TrueType (editable). KEGG's own pathway text is part of the raster.
 
-All tunable parameters live in the `CONFIG` block at the top of each script.
+All tunable parameters (`SIG_THRESH`, `LIMIT`, `CMAP`, dataset caption) live
+in the `CONFIG` block at the top of `scripts/mitophagy_kegg_overlay.py`.
 
 ## Reproducing
 
-**R (pathway diagram):**
 ```bash
-Rscript scripts/mitophagy_pathview.R
+python scripts/mitophagy_kegg_overlay.py
 ```
-Requires R with `pathview` and the Bioconductor annotation data packages
-`org.Hs.eg.db` and `GenomeInfoDbData`. `pathview` downloads the KEGG KGML/PNG
-for `hsa04137` at runtime (needs network access to rest.kegg.jp / kegg.jp).
 
-**Python (legend):**
-```bash
-python scripts/make_legend.py
-```
-Requires `matplotlib` and numpy; uses the system Arial font if available.
+Requires Python 3 with `matplotlib`, `numpy`, `pandas`, `pillow`, and network
+access to `rest.kegg.jp` on the first run (downloads are cached in `kegg/`).
 
-## Notes
+## Results
 
-- The 5 genes with `NA` values and the genes with `|log2FC| < 2` render gray.
-- 11 genes have `|log2FC| >= 2`; see `data/sig_genes_table.csv` (built by
-  `scripts/sig_genes_table.R`) for their Entrez IDs, symbols, values, and the
-  per-gene HEX codes. That script verifies every row's value against
-  `fc_data.tsv` before writing.
-- On the asymmetric scale, the single largest value (CALCOCO2, +13.08) and the
-  next (NLRX1, +10.56) share the top yellow bins, while the +2 to +4 genes
-  cluster near the teal midpoint (+3.0).
+Significant genes (`|log2FC| ≥ 2`; all 11 are on the map):
 
-### Node coloring vs. gene identity (important)
+| Entrez | Symbol | log2FC | Colour |
+|---|---|---|---|
+| 10241 | CALCOCO2 | +13.08 | `#fde725` (clamped) |
+| 79671 | NLRX1 | +10.56 | `#fde725` (clamped) |
+| 10133 | OPTN | +5.21 | `#aadc32` |
+| 4580 | MTX1 | +4.58 | `#8bd646` |
+| 5071 | PRKN | +3.82 | `#69cd5b` |
+| 1460 | CSNK2B | +3.23 | `#54c568` |
+| 84557 | MAP1LC3A | +2.34 | `#35b779` |
+| 7316 | UBC | +2.25 | `#34b679` |
+| 65018 | PINK1 | +2.22 | `#32b67a` |
+| 285973 | ATG9B | −4.96 | `#46337f` |
+| 338382 | RAB7B | −7.08 | `#440154` (clamped) |
 
-KEGG collapses gene families into a single box. For example the box labeled
-**RAB7A** maps two Entrez IDs, `{RAB7A=7879, RAB7B=338382}`, and the box labeled
-**ATG9A** maps `{ATG9A=79065, ATG9B=285973}`. pathview draws each box with its
-representative gene's *label* but colors it by the *aggregate* of all mapped
-members. So a strongly-colored box can be driven by a non-representative family
-member: the deep-purple "RAB7A" box is colored by **RAB7B (338382, −7.08)** —
-RAB7A itself (7879) is +0.44 and not significant.
+15 boxes are coloured (PRKN appears three times on the map, MAP1LC3A/LC3 and
+RAB7B twice); 54 boxes are measured but not significant; 8 boxes contain no
+measured gene.
 
-Consequently:
-- `data/sig_genes_table.csv` is **gene-level** — it is authoritative for gene
-  identity and value (verified against `fc_data.tsv`).
-- The pathway PNG shows **node-level aggregated** coloring.
-- When a colored box interests you, check the gene table for which family member
-  actually carries the signal rather than reading the box label directly.
+### Changes from v1
+
+- **Scale**: v1 used an asymmetric scale (−7.08 … +13.08) whose teal midpoint
+  fell at +3.0, so PINK1 (+2.2), UBC, MAP1LC3A, CSNK2B and PRKN (+3.8) all
+  rendered teal — visually indistinguishable from "no change". v2 centres the
+  scale on 0.
+- **Labels**: v1 labelled boxes with KEGG's representative gene (e.g. "RAB7A",
+  "ATG9A", "MTX2", "CSNK2A1") even when a different family member carried
+  the colour. v2 labels coloured boxes with the driver gene (RAB7B, ATG9B,
+  MTX1, CSNK2B); `data/node_table.csv` lists every member of every box.
+- **Toolchain**: no R / pathview / `org.Hs.eg.db` dependency.
