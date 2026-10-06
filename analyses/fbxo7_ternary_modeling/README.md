@@ -91,3 +91,9 @@ python scripts/relax_score_boltz_decoy.py <model_0.pdb> <sample_name>
 - ddG is reported in Rosetta Energy Units (REU). Negative ddG = stabilizing.
 - WT reference is produced by the same Boltz to Rosetta pipeline as the variants so that the
   dG(variant) − dG(WT) subtraction is protocol-consistent.
+
+## Manuscript figures (v2, decoy-level)
+
+`manuscript_figures/` holds the final-site-set figures (AlphaMissense, Rosetta ddG heatmaps and decoy rainplot), the decoy-level input data,
+Supp Tables 16 and 18, and the scripts that regenerate them. It supersedes `results/fbxo7_ddg_combined.csv` and `scripts/plot_ddg_heatmap.py`
+(kept, not deleted). See `manuscript_figures/README.md`.

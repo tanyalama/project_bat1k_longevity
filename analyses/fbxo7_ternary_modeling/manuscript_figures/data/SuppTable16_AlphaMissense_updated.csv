@@ -1,0 +1,19 @@
+Variant,Position,WT_residue,Variant_residue,Mean_pathogenicity_at_position,Variant_pathogenicity,AlphaMissense_class,Species_site_sets,Rosetta_tested
+P17Q,17,P,Q,0.2102,0.1164,benign,—,yes
+T19E,19,T,E,0.137,0.0904,benign,"Myotis myotis, Myotis nigricans, Desmodus rotundus, Diphylla ecaudata",yes
+T47A,47,T,A,0.2346,0.0672,benign,"Myotis myotis, Myotis nigricans, Desmodus rotundus",yes
+T47E,47,T,E,0.2346,0.2437,benign,Diphylla ecaudata,yes
+A64T,64,A,T,0.3095,0.0977,benign,Myotis myotis,yes
+S109P,109,S,P,0.1706,0.0712,benign,"Myotis myotis, Myotis nigricans, Desmodus rotundus, Diphylla ecaudata",yes
+S110C,110,S,C,0.1512,0.0774,benign,Diphylla ecaudata,yes
+S110H,110,S,H,0.1512,0.1834,benign,Desmodus rotundus,yes
+Q119R,119,Q,R,0.1356,0.0792,benign,—,yes
+Q127E,127,Q,E,0.1679,0.0632,benign,"Myotis myotis, Myotis nigricans, Desmodus rotundus, Diphylla ecaudata",yes
+F146V,146,F,V,0.1342,0.0511,benign,"Myotis myotis, Myotis nigricans, Desmodus rotundus, Diphylla ecaudata",yes
+I151V,151,I,V,0.1396,0.0633,benign,—,yes
+D191G,191,D,G,0.1756,0.066,benign,Desmodus rotundus,yes
+A195P,195,A,P,0.2307,0.1104,benign,—,no
+L290P,290,L,P,0.1045,0.0462,benign,"Desmodus rotundus, Diphylla ecaudata",yes
+E292R,292,E,R,0.2558,0.1419,benign,Diphylla ecaudata,yes
+G409I,409,G,I,0.1796,0.1609,benign,"Myotis myotis, Myotis nigricans",yes
+G409R,409,G,R,0.1796,0.166,benign,"Desmodus rotundus, Diphylla ecaudata",yes
