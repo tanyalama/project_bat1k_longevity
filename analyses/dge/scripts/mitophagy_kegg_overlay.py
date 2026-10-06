@@ -45,6 +45,12 @@ UP_RANGE    = (0.62, 1.00)   # viridis fraction used for upregulated:  +LFC_THRE
 GRAY        = "#CCCCCC"  # measured, not significant
 WHITE       = "#FFFFFF"  # not in dataset
 DATASET     = "M. myotis vs M. musculus fibroblasts (DESeq2)"
+# hyphy RELAX tags, limited to the genes named in the Fig S3 caption (FBXO7 is not on hsa04137).
+# symbol -> (badge text, selection regime, badge anchor relative to box: (dx, dy) in KEGG px from box centre)
+SELECTION_TAGS = {
+    "OPA1":  ("k > 1", "intensified", (44, 0)),     # RELAX k = 48.56, LRT p = 0.0153
+    "HUWE1": ("k < 1", "relaxed",     (-46, -11)),  # RELAX, Supp Table 8 (BH p < 0.0001)
+}
 FONT_TTFS   = ("/System/Library/Fonts/Supplemental/Arial.ttf", "/Library/Fonts/Arial.ttf",
                "/usr/share/fonts/truetype/msttcorefonts/Arial.ttf")
 # ---------------------------------------------------------------------------
@@ -156,12 +162,23 @@ def draw_key(fig, bar_rect, sw_rect, fs=9):
     items = [(GRAY, f"Not significant (|log$_2$FC| < {LFC_THRESH:g} or padj ≥ {PADJ_THRESH:g})"),
              (WHITE, "Not measured (absent from dataset or log$_2$FC = NA)")]
     x0, y0, sw, sh, gap = sw_rect
+    lx = x0 + sw * 1.35 + (0.035 if sw >= 0.03 else 0.0)   # label x; clears the wider badge
     for i, (c, txt) in enumerate(items):
         y = y0 - i * gap
         sax = fig.add_axes([x0, y, sw, sh]); sax.axis("off")
         sax.add_patch(Rectangle((0, 0), 1, 1, facecolor=c, edgecolor="black", lw=0.6))
         sax.set_xlim(0, 1); sax.set_ylim(0, 1)
-        fig.text(x0 + sw * 1.35, y + sh / 2, txt, fontsize=fs, va="center")
+        fig.text(lx, y + sh / 2, txt, fontsize=fs, va="center")
+    seen = []
+    for txt, regime, _ in SELECTION_TAGS.values():
+        if (txt, regime) in seen: continue
+        seen.append((txt, regime))
+        y = y0 - (len(items) + len(seen) - 1) * gap
+        fig.text(x0 + sw / 2, y + sh / 2, txt, ha="center", va="center", fontsize=fs * 0.85,
+                 fontweight="bold", bbox=dict(boxstyle="round,pad=0.25,rounding_size=0.6",
+                                              facecolor="white", edgecolor="black", lw=0.9))
+        fig.text(lx, y + sh / 2,
+                 f"{regime.capitalize()} selection (hyphy RELAX)", fontsize=fs, va="center")
 
 # ---- pathway figure -----------------------------------------------------------------
 base = Image.open(png).convert("RGB"); W, H = base.size
@@ -179,17 +196,31 @@ for r in nd.itertuples():
         t.set_fontsize(fs)
         if t.get_window_extent(rend).width <= r.w - 3:
             break
+from matplotlib.patches import FancyBboxPatch
+def badge(ax, cx, cy, txt, fs=7.5, zorder=4):
+    ax.text(cx, cy, txt, ha="center", va="center", fontsize=fs, fontweight="bold", zorder=zorder + 1,
+            bbox=dict(boxstyle="round,pad=0.25,rounding_size=0.6", facecolor="white",
+                      edgecolor="black", lw=0.9))
+nd["selection"] = None
+for symb, (txt, regime, (dx, dy)) in SELECTION_TAGS.items():
+    hit = nd[nd.label == symb]
+    assert len(hit) >= 1, f"selection tag gene {symb} not found on map"
+    for i, r in hit.iterrows():
+        ax.add_patch(Rectangle((r.x - r.w / 2, r.y - r.h / 2), r.w, r.h, facecolor="none",
+                               edgecolor="black", lw=2.2, zorder=3.5))     # emphasised outline
+        badge(ax, r.x + dx, r.y + dy, txt)
+        nd.at[i, "selection"] = f"{regime} ({txt})"
 ax.add_patch(Rectangle((2, H - 36), 200, 34, facecolor="white", edgecolor="none", zorder=2))
 ax.text(10, H - 24, f"Data on KEGG graph {PATHWAY}", fontsize=8, va="center", zorder=3)
 ax.text(10, H - 12, DATASET, fontsize=8, va="center", zorder=3)
-draw_key(fig, [0.70, 0.948, 0.285, 0.020], (0.70, 0.872, 0.020, 0.018, 0.030))
+draw_key(fig, [0.70, 0.948, 0.285, 0.020], (0.70, 0.880, 0.020, 0.016, 0.0215))
 fig.savefig(OUT_STEM + ".pdf", facecolor="white")
 fig.savefig(OUT_STEM + ".png", dpi=300, facecolor="white")
 plt.close(fig)
 
 # ---- standalone legend --------------------------------------------------------------
-lf = plt.figure(figsize=(4.2, 1.6), dpi=300)
-draw_key(lf, [0.06, 0.66, 0.88, 0.13], (0.06, 0.25, 0.045, 0.11, 0.19))
+lf = plt.figure(figsize=(4.2, 2.1), dpi=300)
+draw_key(lf, [0.06, 0.76, 0.88, 0.10], (0.06, 0.45, 0.045, 0.08, 0.13))
 lf.savefig("figures/legend.pdf", bbox_inches="tight", facecolor="white")
 lf.savefig("figures/legend.png", dpi=300, bbox_inches="tight", facecolor="white")
 plt.close(lf)

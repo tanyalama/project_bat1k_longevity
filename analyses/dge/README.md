@@ -28,6 +28,7 @@ dge/
     ├── hsa04137.log2fc.viridis.pdf # the coloured pathway (vector boxes/text over the KEGG raster)
     ├── hsa04137.log2fc.viridis.png # same, 300 dpi
     ├── legend.pdf / legend.png     # standalone colour key (Arial)
+    ├── FigS3_caption.md            # figure legend text matching the current figure
     └── hsa04137.log2fc.png         # v1 figure (superseded; asymmetric scale, teal midpoint at +3)
 ```
 
@@ -93,8 +94,22 @@ RAB7B twice each), 54 measured but not significant (grey), 8 not measured (white
 PRKN is the only gene whose call depends on the padj cutoff: it passes at 0.05 and
 would fail at 0.01.
 
+### Selection tags (hyphy RELAX)
+
+Only the genes named in the Fig S3 caption are tagged (`SELECTION_TAGS` in the script);
+FBXO7 is named in the caption but is not a node on hsa04137.
+
+| Gene | Tag | RELAX result | Source |
+|---|---|---|---|
+| OPA1 | k > 1 (intensified) | k = 48.56, LRT p = 0.0153 | RELAX .json (not in Supp Tables 8/9) |
+| HUWE1 | k < 1 (relaxed) | relaxation, BH-adjusted p < 0.0001 | Supp Table 8 (*M. myotis* vs *M. nigricans*) |
+
+Tagged boxes get a heavy black outline and a `k > 1` / `k < 1` badge; the key explains both.
+The caption text is in `figures/FigS3_caption.md`.
+
 ### Changes from v1
 
+- **Selection tags (v2.2)**: OPA1 (k > 1) and HUWE1 (k < 1) are tagged per the Fig S3 caption.
 - **Significance (v2.1)**: genes are coloured only when |log2FC| ≥ 2 **and** padj < 0.05. The key has a grey band over −2…+2, and unmeasured genes are white rather than grey.
 - **Scale**: v1 used an asymmetric scale (−7.08 … +13.08) whose teal midpoint
   fell at +3.0, so PINK1 (+2.2), UBC, MAP1LC3A, CSNK2B and PRKN (+3.8) all
