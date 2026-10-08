@@ -1,0 +1,33 @@
+Missing data (non-ACGT) in codon alignments
+directories: final_alignment/fastas = /project/tlama_umass_edu/projects/project_bat1k_longevity/data/final_alignment/fastas; 7082_fastas = /project/tlama_umass_edu/projects/project_bat1k_longevity/data/7082_fastas
+
+  final_alignment/fastas  10893 alignments, median 0.29%, mean 0.88%
+  7082_fastas              7077 alignments, median 0.24%, mean 1.33%
+
+PER ALIGNMENT (pooled over sequences; 17970 alignments)
+  median 0.27% | mean 1.06% | IQR 0.06% - 0.92% (index quartiles sorted[n//4], sorted[3n//4])
+  interpolated quartiles (statistics.quantiles, inclusive): 0.06% - 0.92%
+  percentiles 5/25/50/75/95/99: 0.00% / 0.06% / 0.27% / 0.92% / 4.66% / 12.87%
+  maximum 41.43% (ENST00000303766.RBMY1F.cleanLb_hmm_manual.fasta)
+  alignments with >10% missing: 285 | >20%: 53
+
+PER SEQUENCE (501221 sequences)
+  median 0.00% | mean 0.83% | maximum 80.23%
+  sequences with >50% missing: 379 | >70%: 60 | >80%: 3
+    >80%: HLmolMol2 in ENST00000368783.LCE2C.cleanLb_hmm_manual.fasta = 80.23%
+    >80%: felCat9 in ENST00000636096.RP11-402P6.15.cleanLb_hmm_manual.fasta = 80.08%
+    >80%: felCat9 in ENST00000535490.CXorf49.cleanLb_hmm_manual.fasta = 80.08%
+
+ALIGNMENTS WITH FEWER THAN 5 SEQUENCES: 12
+    ENST00000587557.ZNF559.cleanLb_hmm_manual.fasta (4 sequences)
+    ENST00000249007.RFPL3.cleanLb_hmm_manual.fasta (3 sequences)
+    ENST00000341415.IGFL3.cleanLb_hmm_manual.fasta (4 sequences)
+    ENST00000342868.BTNL3.cleanLb_hmm_manual.fasta (3 sequences)
+    ENST00000360675.LGALS14.cleanLb_hmm_manual.fasta (4 sequences)
+    ENST00000434883.CT47A7.cleanLb_hmm_manual.fasta (4 sequences)
+    ENST00000439466.CT47A5.cleanLb_hmm_manual.fasta (3 sequences)
+    ENST00000452198.IGHD6-25.cleanLb_hmm_manual.fasta (4 sequences)
+    ENST00000529716.NPIPB8.cleanLb_hmm_manual.fasta (4 sequences)
+    ENST00000542739.CXorf49B.cleanLb_hmm_manual.fasta (4 sequences)
+    ENST00000613249.ZNF790.cleanLb_hmm_manual.fasta (4 sequences)
+    ENST00000641992.OR8G5.cleanLb_hmm_manual.fasta (4 sequences)
