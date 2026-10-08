@@ -54,11 +54,6 @@ for ax, lab in zip(axes, cols):
         for b in p['bodies']: b.set_facecolor(c); b.set_edgecolor('none'); b.set_alpha(0.18 if faded else 0.32)
         ax.scatter(v, np.full_like(v, i) + rng.uniform(-.2, .2, len(v)), s=2.2, color=c, alpha=0.45 if faded else 0.8, lw=0, zorder=2)
         ax.plot([np.median(v)] * 2, [i - .38, i + .38], color='black', lw=1.0, zorder=3)
-    if lab == 'FBXO7-PINK1':   # baseline: medians of sites outside the PINK1- and PSMF1-binding regions (species site-sets excluded)
-        base = [s for g, ss in groups if not g.startswith(('PINK1', 'PSMF1', 'Species')) for s in ss]
-        lo, hi = med.loc[[(s, lab) for s in base]].min(), med.loc[[(s, lab) for s in base]].max()
-        ax.axvspan(lo, hi, color=vir(0.5), alpha=0.10, zorder=0)
-        ax.text((lo + hi) / 2, -0.75, 'range of distal-site medians', ha='center', va='bottom', fontsize=FS_SMALL - 0.5, color=vir(0.38))
     y0 = -.5
     for name, ss in groups:
         y1 = y0 + len(ss)
@@ -73,7 +68,7 @@ for ax, lab in zip(axes, cols):
     ax.tick_params(labelsize=FS_TICK, length=2, width=0.5, pad=1.5)
     for k in ['top', 'right']: ax.spines[k].set_visible(False)
     for k in ['left', 'bottom']: ax.spines[k].set_linewidth(0.5)
-    ax.margins(x=0.03); ax.set_ylim(len(order) - .5, -1.3)
+    ax.margins(x=0.03); ax.set_ylim(len(order) - .5, -0.7)
 axes[1].tick_params(labelleft=False)
 axes[0].set_yticks(range(len(order))); axes[0].set_yticklabels([pretty.get(s, s) for s in order], fontsize=FS_TICK)
 handles = [Patch(facecolor=COL['stabilizing'], alpha=0.6, label='stabilizing'), Patch(facecolor=COL['destabilizing'], alpha=0.6, label='destabilizing'),

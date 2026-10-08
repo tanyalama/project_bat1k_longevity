@@ -27,7 +27,7 @@ P17Q, Q119R and I151V were modeled in Rosetta but are in no final site-set; they
 | `FigS_ddG_heatmap_four_species` | Supplement: ddG heatmap, 14 variants + 4 species site-sets | `04_make_FigS_heatmap_four_species.py` |
 | `FigS9_rosetta_ddG_decoys_viridis` | Supplement: per-decoy ddG rainplot (180 x 100 mm) | `05_make_FigS_rainplot.py` |
 
-Supplement figure numbers are placeholders. Colour: viridis green = stabilizing, purple = destabilizing, grey = not distinguishable from WT.
+Supplement figure numbers are placeholders. Colour: viridis green = stabilizing, purple = destabilizing, grey = not distinguishable from WT. In `FigS_alphamissense_four_species` the labels and lines are blue and the variant-score dots yellow so they cannot be read as those calls; Fig 3B (*Myotis*) keeps purple labels and green dots.
 
 ## Data and tables (`data/`)
 
@@ -36,7 +36,7 @@ Supplement figure numbers are placeholders. Colour: viridis green = stabilizing,
 | `all_decoys_interface_metrics.tsv` | Input. Relax decoys (25 per sample per interface; WT + 21 variants/site-sets) with `dG_separated` and interface metrics |
 | `TableS18_rosetta_ddG_decoy_stats.csv` | Supp Table 18 (42 rows): median ddG vs WT, bootstrap 95% CI, Mann-Whitney p, BH-adjusted p, call. Written by `01_...py` |
 | `AlphaMissense_Q9Y3I1.csv` | AlphaMissense scores for all FBXO7 missense variants (AlphaFold DB `AF-Q9Y3I1-F1`; Cheng et al. 2023, CC BY 4.0) |
-| `SuppTable16_AlphaMissense_updated.csv` | Supp Table 16 (18 variants). Written by `00_...py` |
+| `SuppTable16_AlphaMissense_updated.csv` | Supp Table 16 (17 single substitutions: the 14 in the final site-sets plus P17Q, Q119R, I151V). Written by `00_...py` |
 
 ## Methods summary
 
@@ -45,6 +45,6 @@ Supplement figure numbers are placeholders. Colour: viridis green = stabilizing,
 - **Call**: significant only if BH-adjusted p < 0.05, the CI excludes 0, and |ddG| > 2.0 REU. The 2.0 REU floor is fixed for consistency across table and figures.
   A WT-vs-WT resampling estimate (97.5th percentile of the median difference) is 2.36 REU at the PINK1 and 2.14 REU at the PSMF1 interface;
   thresholds of 2.0, 2.3 and 2.4 give the same 34 significant calls.
-- **Baseline band (rainplot, PINK1 panel)**: range of medians of sites outside the PINK1- and PSMF1-binding regions (Ubl and both CDK6 segments; species site-sets excluded), -10.2 to -5.9 REU.
+- **PINK1-interface background**: all ten substitutions outside the PINK1-binding segment read -3 to -10 REU at the PINK1 interface, which suggests an offset between the wild-type and variant models rather than site-specific effects (cause to be confirmed). The rainplot no longer draws a band for it; interpret PINK1-interface values relative to this background (Q127E, -16.3, and S110C, +6.8, are the PINK1-segment substitutions clearly beyond it).
 - **Regions** (UniProt Q9Y3I1): Ubl/Parkin-binding 1-88, PINK1-binding 92-129, CDK6-binding 129-169, PSMF1/dimerization 180-324, CDK6-binding 381-522.
-- **AlphaMissense**: mean pathogenicity = mean of the 19 substitution scores at a residue; "likely benign" < 0.34. Parkin was not part of the ternary model, so effects of the Ubl-region variants on Parkin binding were not assessed.
+- **AlphaMissense**: mean pathogenicity = mean of the scores of all possible substitutions at a residue (19 per position; not a variant count); "likely benign" < 0.34. Parkin was not part of the ternary model, so effects of the Ubl-region variants on Parkin binding were not assessed.
