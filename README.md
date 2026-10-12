@@ -25,6 +25,7 @@ documenting the objective, inputs, pipeline, outputs, and scripts required for r
 | Comparative transcriptomics | EVE (Expression Variance and Evolution) | [`analyses/eve/`](analyses/eve/) |
 | FBXO7–PINK1–PSMF1 variant modeling | stage 2 Boltz-2 protocol + PyRosetta ΔΔG | [`analyses/fbxo7_ternary_modeling/`](analyses/fbxo7_ternary_modeling/) |
 | Western blot quantification | Welch *t*-tests + ggplot2 boxplots | [`analyses/western_blots/`](analyses/western_blots/) |
+| Phylogeny + longevity quotient figure (node-age HPD, bootstrap) | T2 timetree (Morales et al. 2026), MCMCTree, CASTER support | [`analyses/phylo_LQ_timetree/`](analyses/phylo_LQ_timetree/) |
 | Branch length vs. genes under selection | Negative binomial regression | [count2branches](https://github.com/lmdavalos/count2branches) |
 
 ## Repository layout
