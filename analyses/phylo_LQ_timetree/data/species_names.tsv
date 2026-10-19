@@ -1,0 +1,31 @@
+id	display_name	group
+hg38	Homo sapiens	outgroup
+mm10	Mus musculus	outgroup
+felCat9	Felis catus	outgroup
+canFam4	Canis lupus familiaris	outgroup
+equCab3	Equus caballus	outgroup
+susScr11	Sus scrofa	outgroup
+bosTau9	Bos taurus	outgroup
+HLrouAeg4	Rousettus aegyptiacus	Yinpterochiroptera
+HLrhiMic1	Rhinopoma microphyllum	Yinpterochiroptera
+HLhipCyc2	Doryrhina cyclops	Yinpterochiroptera
+HLaseSto2	Aselliscus stoliczkanus	Yinpterochiroptera
+HLhipLar2	Hipposideros larvatus	Yinpterochiroptera
+HLrhiFer5	Rhinolophus ferrumequinum	Yinpterochiroptera
+HLrhiAff2	Rhinolophus affinis	Yinpterochiroptera
+HLrhiSed2	Rhinolophus yonghoiensis	Yinpterochiroptera
+HLrhiTri2	Rhinolophus trifoliatus	Yinpterochiroptera
+HLrhiLuc4	Rhinolophus perniger lanosus	Yinpterochiroptera
+HLsacLep1	Saccopteryx leptura	Yangochiroptera
+HLsacBil1	Saccopteryx bilineata	Yangochiroptera
+HLdesRot8A	Desmodus rotundus	Yangochiroptera
+HLdipEca1	Diphylla ecaudata	Yangochiroptera
+HLartJam3	Artibeus jamaicensis	Yangochiroptera
+HLphyDis3	Phyllostomus discolor	Yangochiroptera
+HLphyHas1	Phyllostomus hastatus	Yangochiroptera
+HLtadBra2	Tadarida brasiliensis	Yangochiroptera
+HLmolMol2	Molossus molossus	Yangochiroptera
+HLpipKuh2	Pipistrellus kuhlii	Yangochiroptera
+HLantPal2	Antrozous pallidus	Yangochiroptera
+HLmyoMyo6	Myotis myotis	Yangochiroptera
+HLmyoNig1	Myotis nigricans	Yangochiroptera
