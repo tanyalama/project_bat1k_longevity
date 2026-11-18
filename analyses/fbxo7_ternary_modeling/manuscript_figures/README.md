@@ -1,55 +1,63 @@
-# Manuscript figures: FBXO7 Rosetta interface ddG and AlphaMissense (v2)
+# FBXO7 manuscript figures
 
-Decoy-level Rosetta analysis and AlphaMissense lookup for the final four-species FBXO7 site-sets. This folder is self-contained:
-every figure and supplementary table below regenerates from `data/` by running the scripts in numeric order
-(`python scripts/00_...py` through `07_...py`; any working directory). Requires numpy, pandas, scipy, matplotlib; the Fig 3C scripts (`06_`, `07_`) also need PyMOL (conda `pymol-open-source`) and Pillow.
+Scripts and inputs for the Figure 3 panels and their supplementary variants. Every script resolves its
+own paths from `__file__`, so each can be run from any working directory:
 
-It supersedes the single-decoy results in `../results/fbxo7_ddg_combined.csv` and `../scripts/plot_ddg_heatmap.py` (kept, not deleted).
+    python scripts/<name>.py
 
-## Final site-sets (human FBXO7, UniProt Q9Y3I1)
+`TableS18_rosetta_ddG_decoy_stats.csv` is the single source of truth for every ddG value and call shown
+in a figure. No figure recomputes a median, a confidence interval or a call; they are read from that
+table, so a figure cannot disagree with it. The table is derived by `01_make_TableS18_rosetta_stats.py`
+from `all_decoys_interface_metrics.tsv` (25 Rosetta decoys per variant per interface). The noise floor
+is the fixed +/- 2.0 REU stated in the manuscript Methods; cells within it, or whose 95% CI spans zero,
+are drawn grey.
 
-| Lineage | Substitutions |
-|---|---|
-| *Myotis myotis* | T19E; T47A; A64T; S109P; Q127E; F146V; G409I |
-| *Myotis nigricans* | T19E; T47A; S109P; Q127E; F146V; G409I |
-| *Desmodus rotundus* | T19E; T47A; S109P; S110H; Q127E; F146V; D191G; L290P; G409R |
-| *Diphylla ecaudata* | T19E; T47E; S109P; S110C; Q127E; F146V; L290P; E292R; G409R |
+## Two versions of Figure 3
 
-P17Q, Q119R and I151V were modeled in Rosetta but are in no final site-set; they appear only in Tables S16/S18.
+Each of the four panels exists in two versions, distinguished by filename suffix.
 
-## Figures
-
-| File (`figures/`) | Content | Script |
+| suffix | content | panel sizes (W x H mm) |
 |---|---|---|
-| `Fig3B_alphamissense_Myotis` | Main Fig 3B: AlphaMissense mean pathogenicity per residue, *M. myotis* + *M. nigricans* sites | `03_make_AlphaMissense_figs.py` |
-| `Fig3D_rosetta_ddG_Myotis_viridis` | Main Fig 3D: Rosetta ddG heatmap, *Myotis* sites | `02_make_Fig3D_Myotis_heatmap.py` |
-| `Fig3C_ternary_surface` | Main Fig 3C: FBXO7 (chain A, grey), PINK1 kinase domain (chain B, blue) and PSMF1 (chain C, teal) as opaque surfaces. Yellow patches mark the wild-type FBXO7 residue at each *M. myotis* position that is visible from this view (T19, T47, S109, Q119, Q127); A64 and G409 face away and are named in the footnote; F146V is left out by choice. Canvas 135 x 100 mm is a placeholder until the layout slot is fixed | `06_make_Fig3C_render.py`, `07_compose_Fig3C_labels.py` |
-| `FigS_alphamissense_four_species` | Supplement: AlphaMissense, all 14 final-set variants | `03_make_AlphaMissense_figs.py` |
-| `FigS_ddG_heatmap_four_species` | Supplement: ddG heatmap, 14 variants + 4 species site-sets | `04_make_FigS_heatmap_four_species.py` |
-| `FigS9_rosetta_ddG_decoys_viridis` | Supplement: per-decoy ddG rainplot (180 x 100 mm) | `05_make_FigS_rainplot.py` |
+| `_myotis_psmf1` | the ten positions variable between *Myotis myotis* and *M. nigricans*, plus three positions in the UniProt PSMF1-binding region (191, 290, 292) where both *Myotis* retain the human residue | A 100x110, B 110x70, C 90x100, D 90x88 |
+| `_four_species` | all 17 modelled substitutions at 14 positions, across all four focal species | A 104x110, B 110x78, C 90x100, D 90x112 |
 
-Supplement figure numbers are placeholders. Colour: viridis green = stabilizing, purple = destabilizing, grey = not distinguishable from WT. In `FigS_alphamissense_four_species` the labels and lines are blue and the variant-score dots yellow so they cannot be read as those calls; Fig 3B (*Myotis*) keeps purple labels and green dots.
+Positions 191, 290 and 292 lie in the PSMF1-binding region as UniProt annotates it (Q9Y3I1, 180-324),
+but **none of the three contacts PSMF1 in the co-folded model**: minimum heavy-atom distances to chain C
+are 16.4, 14.4 and 20.8 A. D191 sits 2.4 A from PINK1 instead. The FBXO7-PSMF1 interface in the model is
+formed by other residues (104 FBXO7 residues within 5 A of chain C; 31 of them inside 180-324). Treat the
+three as region members, not interface contacts.
 
-## Data and tables (`data/`)
+## Scripts, in run order
 
-| File | Description |
+| script | output |
 |---|---|
-| `all_decoys_interface_metrics.tsv` | Input. Relax decoys (25 per sample per interface; WT + 21 variants/site-sets) with `dG_separated` and interface metrics |
-| `TableS18_rosetta_ddG_decoy_stats.csv` | Supp Table 18 (42 rows): median ddG vs WT, bootstrap 95% CI, Mann-Whitney p, BH-adjusted p, call. Written by `01_...py` |
-| `AlphaMissense_Q9Y3I1.csv` | AlphaMissense scores for all FBXO7 missense variants (AlphaFold DB `AF-Q9Y3I1-F1`; Cheng et al. 2023, CC BY 4.0) |
-| `SuppTable16_AlphaMissense_updated.csv` | Supp Table 16 (17 single substitutions: the 14 in the final site-sets plus P17Q, Q119R, I151V). Written by `00_...py` |
-| `FBXO7_PINK1kinase_PSMF1_forcedtocif_model_0.cif` | Input to Fig 3C. Ternary model: chain A FBXO7 (522 residues, identical to UniProt Q9Y3I1), chain B PINK1 kinase domain, chain C PSMF1. The B-factor column appears to hold per-residue pLDDT. How the model was generated is not recorded here |
-| `Fig3C_anchors.json` | Written by `06_...py`: visible pixels and image position of each *M. myotis* site patch, from a flat-colour pass with the same camera; read by `07_...py` |
-| `Fig3C_chainmask.png` | Written by `06_...py`: per-pixel chain map of the render (0 background, 1 FBXO7, 2 PINK1, 3 PSMF1); read by `07_...py` |
+| `00_make_SuppTable16_AlphaMissense.py` | Supplementary Table 16 (AlphaMissense scores) |
+| `01_make_TableS18_rosetta_stats.py` | Table S18: per-variant ddG medians, CIs and calls |
+| `02_make_Fig3D_Myotis_heatmap.py` | Fig 3D, original *Myotis*-only panel (10 rows, 90x70 mm) |
+| `03_make_AlphaMissense_figs.py` | every AlphaMissense panel: both Fig 3B versions and the 180 mm supplementary strips |
+| `04_make_FigS_heatmap_four_species.py` | supplementary four-species ddG heatmap |
+| `05_make_FigS_rainplot.py` | Fig S9 per-decoy ddG rainplot |
+| `06_make_Fig3C_render.py` | PyMOL surface render + chain/site mask. `--sites "19:T19E 191:D191 ..."` overrides the default site set |
+| `07_compose_Fig3C_labels.py` | places the leader-line labels over the render |
+| `08_make_Fig3A_alignment.py` | both Fig 3A alignment panels (`myotis_psmf1`, `four_species` or `both`) |
+| `09_make_Fig3D_myotis_psmf1.py` | Fig 3D, *Myotis* + PSMF1-region version |
+| `10_make_Fig3D_four_species.py` | Fig 3D, four-species version |
+| `11_make_Fig3C_versions.sh` | runs 06 then 07 twice, once per version, renaming the intermediates |
 
-## Methods summary
+`06` and `11` need PyMOL; everything else needs only numpy, pandas, matplotlib and gemmi.
 
-- **ddG** = median `dG_separated` of the 25 decoys of a sample minus the median of the 25 WT decoys, per interface (REU; negative = stabilizing).
-- **Interval and test**: bootstrap (10,000 resamples of n = 25) of the difference of medians gives the 95% CI; two-sided Mann-Whitney U against WT; Benjamini-Hochberg across all 42 tests.
-- **Call**: significant only if BH-adjusted p < 0.05, the CI excludes 0, and |ddG| > 2.0 REU. The 2.0 REU floor is fixed for consistency across table and figures.
-  A WT-vs-WT resampling estimate (97.5th percentile of the median difference) is 2.36 REU at the PINK1 and 2.14 REU at the PSMF1 interface;
-  thresholds of 2.0, 2.3 and 2.4 give the same 34 significant calls.
-- **PINK1-interface background**: all ten substitutions outside the PINK1-binding segment read -3 to -10 REU at the PINK1 interface, which suggests an offset between the wild-type and variant models rather than site-specific effects (cause to be confirmed). The rainplot no longer draws a band for it; interpret PINK1-interface values relative to this background (Q127E, -16.3, and S110C, +6.8, are the PINK1-segment substitutions clearly beyond it).
-- **Regions** (UniProt Q9Y3I1): Ubl/Parkin-binding 1-88, PINK1-binding 92-129, CDK6-binding 129-169, PSMF1/dimerization 180-324, CDK6-binding 381-522.
-- **AlphaMissense**: mean pathogenicity = mean of the scores of all possible substitutions at a residue (19 per position; not a variant count); "likely benign" < 0.34. Parkin was not part of the ternary model, so effects of the Ubl-region variants on Parkin binding were not assessed.
-- **Fig 3C**: PyMOL all-surface render of the ternary model with PINK1 above PSMF1 (rotation 90 degrees about the vertical and -30 degrees about the horizontal axis, chosen from a scan of 168 orientations for the visible area of the three PINK1-interface site patches). A flat-colour pass with the same camera measures the visible pixels of each site patch and chain (`Fig3C_anchors.json`, `Fig3C_chainmask.png`); `07_...py` uses them to place labels and leader lines on the white background without overlaps. F146V is deliberately left uncoloured and unlabelled (`--omit F146V`, the default). Keep `surface_quality` 1 and `ray_trace_mode` 0 as set in `06_...py`; outlined ray mode with higher surface quality did not finish in testing.
+## Inputs
+
+- `data/alignment/` holds the 30-species FBXO7 codon alignment, the species tree, the display-name table
+  and the manual residue overrides used by `08`. `species_names.tsv` is the same file as the copy in
+  `analyses/phylo_LQ_timetree/data/`; keep the two in step.
+- `data/FBXO7_PINK1kinase_PSMF1_forcedtocif_model_0.cif` is the Boltz ternary model used by `06`.
+- `data/Fig3C_anchors_*.json` and `data/Fig3C_chainmask_*.png` are written by `06` and consumed by `07`.
+- `data/FBXO7_site_residues_*.csv` and `data/Fig3A_alignment_QC_*.txt` are written by `08`; the QC file
+  records any disagreement between the alignment and the modelled variant lists.
+
+## Known discrepancy
+
+The alignment gives *Desmodus rotundus* and *Diphylla ecaudata* a T at position 151 and an E at 119,
+neither of which appears in their modelled site-sets. This is recorded in both
+`Fig3A_alignment_QC_*.txt` files and is unresolved.

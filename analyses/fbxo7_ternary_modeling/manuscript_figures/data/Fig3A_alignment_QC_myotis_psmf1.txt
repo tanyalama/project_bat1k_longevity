@@ -1,0 +1,22 @@
+Fig 3A alignment QC
+sites: [17, 19, 47, 64, 109, 119, 127, 146, 151, 191, 290, 292, 409]
+alignment: 30 sequences, 523 codons; human numbering via hg38
+
+masked/ambiguous codons at the sites: 9
+  Sus scrofa (susScr11) position 290: still X (drawn as X)
+  Saccopteryx leptura (HLsacLep1) position 409: replaced by R from site_overrides.tsv
+  Saccopteryx bilineata (HLsacBil1) position 409: replaced by R from site_overrides.tsv
+  Desmodus rotundus (HLdesRot8A) position 409: replaced by R from site_overrides.tsv
+  Diphylla ecaudata (HLdipEca1) position 409: replaced by R from site_overrides.tsv
+  Artibeus jamaicensis (HLartJam3) position 409: replaced by R from site_overrides.tsv
+  Phyllostomus discolor (HLphyDis3) position 409: replaced by R from site_overrides.tsv
+  Phyllostomus hastatus (HLphyHas1) position 409: replaced by R from site_overrides.tsv
+  Pipistrellus kuhlii (HLpipKuh2) position 119: replaced by Q from site_overrides.tsv
+
+substitutions vs human at SITES in the four focal species, compared with the Rosetta composites (Table S16 Species_site_sets):
+  Myotis myotis: in alignment, not modelled: none | modelled, not in alignment: none
+  Myotis nigricans: in alignment, not modelled: none | modelled, not in alignment: none
+  Desmodus rotundus: in alignment, not modelled: ['I151T', 'Q119E'] | modelled, not in alignment: none
+  Diphylla ecaudata: in alignment, not modelled: ['I151T', 'Q119E'] | modelled, not in alignment: none
+
+unshaded residue per column (commonest, >= 50% of sequences): 17:P, 19:-, 47:A, 64:A, 109:S, 119:Q, 127:-, 146:F, 151:I, 191:D, 290:L, 292:E, 409:G

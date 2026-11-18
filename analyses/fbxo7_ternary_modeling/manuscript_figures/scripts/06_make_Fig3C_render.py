@@ -22,15 +22,23 @@ ap.add_argument('--cif', default=str(DATA / 'FBXO7_PINK1kinase_PSMF1_forcedtocif
 ap.add_argument('--theta', type=float, default=90.0); ap.add_argument('--phi', type=float, default=-30.0)
 ap.add_argument('--w', type=int, default=2400); ap.add_argument('--h', type=int, default=1800)
 ap.add_argument('--quality', type=int, default=1); ap.add_argument('--antialias', type=int, default=2); ap.add_argument('--buffer', type=float, default=1.0)
+ap.add_argument('--sites', nargs='*', default=None, help='pos:label pairs replacing the default M. myotis site set')
 ap.add_argument('--omit', nargs='*', default=['F146V'], help='variant names (e.g. F146V) to leave uncoloured and unlabelled in the final figure; they are still measured')
 a = ap.parse_args()
 T0 = time.time(); log = lambda m: print('[%5.1fs] %s' % (time.time() - T0, m), flush=True)
 
 SITES = {19: 'T19E', 47: 'T47A', 64: 'A64T', 109: 'S109P', 119: 'Q119R', 127: 'Q127E', 146: 'F146V', 409: 'G409I'}   # M. myotis, human FBXO7 numbering
+if a.sites:                                                   # --sites "19:T19E 191:D191" overrides the default set
+    SITES = {int(s.split(':')[0]): s.split(':')[1] for s in a.sites}
 CHAIN = {'fbxo7': 'A', 'pink1': 'B', 'psmf1': 'C'}
 COL = {'fbxo7': '#bcbcbc', 'pink1': '#4f4fa6', 'psmf1': '#5f9696', 'site': '#f5e51b'}
 MASKRGB = {'fbxo7': (150, 150, 150), 'pink1': (20, 20, 120), 'psmf1': (20, 120, 120)}
-SITERGB = {19: (255, 0, 0), 47: (0, 255, 0), 64: (0, 0, 255), 109: (255, 0, 255), 119: (0, 255, 255), 127: (255, 128, 0), 146: (128, 0, 255), 409: (255, 255, 0)}
+import colorsys                                              # one well-separated flat colour per site for the mask pass
+_h = [i / max(1, len(SITES)) for i in range(len(SITES))]
+SITERGB = {p: tuple(int(round(255 * c)) for c in colorsys.hsv_to_rgb(h, 1.0, 1.0 if i % 2 == 0 else 0.62))
+           for i, (p, h) in enumerate(zip(sorted(SITES), _h))}
+_k = sorted(SITERGB)
+assert min(sum(abs(x - y) for x, y in zip(SITERGB[u], SITERGB[v])) for i, u in enumerate(_k) for v in _k[i+1:]) > 90, 'mask colours too close'
 
 pymol.finish_launching(['pymol', '-cq'])
 cmd.reinitialize(); cmd.load(a.cif, 'cplx')

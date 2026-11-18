@@ -1,0 +1,31 @@
+species,17,19,47,64,109,119,127,146,151,191,290,292,409
+Homo sapiens,P,T,T,A,S,Q,Q,F,I,D,L,E,G
+Mus musculus,P,S,A,A,T,Q,Q,V,I,G,P,E,M
+Felis catus,P,A,A,A,S,Q,Q,F,V,D,P,E,G
+Canis lupus familiaris,P,A,A,A,S,Q,Q,F,V,D,P,E,A
+Equus caballus,P,A,A,A,S,Q,Q,F,I,D,L,E,G
+Sus scrofa,P,A,A,A,S,Q,Q,S,D,D,X,E,G
+Bos taurus,P,V,A,A,S,Q,Q,F,V,D,S,E,G
+Rousettus aegyptiacus,S,T,A,A,S,Q,E,F,I,D,P,E,G
+Rhinopoma microphyllum,P,T,A,A,S,Q,E,F,I,D,P,E,G
+Doryrhina cyclops,P,T,A,A,S,E,E,F,I,D,P,E,G
+Aselliscus stoliczkanus,P,T,A,A,S,Q,E,F,I,D,L,E,G
+Hipposideros larvatus,P,T,A,A,S,Q,E,F,I,A,P,G,G
+Rhinolophus ferrumequinum,P,T,A,A,S,Q,E,F,I,D,S,E,G
+Rhinolophus affinis,P,T,A,A,S,Q,E,F,I,D,S,E,G
+Rhinolophus yonghoiseni,P,T,A,A,S,Q,E,F,I,D,S,E,G
+Rhinolophus trifoliatus,P,T,A,A,S,Q,E,F,I,D,S,E,G
+Rhinolophus perniger lanosus,P,T,A,A,S,Q,E,F,I,D,S,E,G
+Saccopteryx leptura,P,E,A,A,P,Q,E,V,I,D,L,E,R
+Saccopteryx bilineata,P,E,A,A,P,Q,E,V,I,D,L,E,R
+Desmodus rotundus,P,E,A,A,P,E,E,V,T,G,P,E,R
+Diphylla ecaudata,P,E,E,A,P,E,E,V,T,D,P,R,R
+Artibeus jamaicensis,P,E,A,A,P,E,E,A,P,G,V,E,R
+Phyllostomus discolor,P,E,A,A,P,E,E,V,A,G,V,E,R
+Phyllostomus hastatus,P,E,A,A,P,E,E,V,S,G,V,G,R
+Tadarida brasiliensis,P,E,A,A,P,Q,E,V,I,D,L,E,I
+Molossus molossus,P,E,A,A,P,Q,E,V,I,D,L,E,I
+Pipistrellus kuhlii,P,E,A,A,P,Q,E,V,I,G,L,E,V
+Antrozous pallidus,P,E,A,A,P,Q,E,V,I,D,L,E,I
+Myotis myotis,P,E,A,T,P,R,E,V,I,D,L,E,I
+Myotis nigricans,Q,E,A,A,P,Q,E,V,V,D,L,E,I

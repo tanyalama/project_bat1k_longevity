@@ -1,0 +1,9 @@
+species_id	human_pos	residue	source
+HLartJam3	409	R	TOGA protein (QUERY) of this genome aligned to UniProt Q9Y3I1 gives Arg; codon is NNN (masked) in the 30-species cleaned alignment
+HLdesRot8A	409	R	TOGA protein (QUERY) of this genome aligned to UniProt Q9Y3I1 gives Arg; codon is NNN (masked) in the 30-species cleaned alignment
+HLdipEca1	409	R	TOGA protein (QUERY) of this genome aligned to UniProt Q9Y3I1 gives Arg; codon is NNN (masked) in the 30-species cleaned alignment
+HLphyDis3	409	R	TOGA protein (QUERY) of this genome aligned to UniProt Q9Y3I1 gives Arg; codon is NNN (masked) in the 30-species cleaned alignment
+HLphyHas1	409	R	TOGA protein (QUERY) of this genome aligned to UniProt Q9Y3I1 gives Arg; codon is NNN (masked) in the 30-species cleaned alignment
+HLsacLep1	409	R	NCBI RefSeq XP_066214330.1 (Saccopteryx leptura): Arg at 409 after alignment to UniProt Q9Y3I1; codon is NNN in both the 30- and 103-bat alignments
+HLsacBil1	409	R	NCBI RefSeq XP_066116039.1 (Saccopteryx bilineata): Arg at 409 after alignment to UniProt Q9Y3I1; codon is NNN in both the 30- and 103-bat alignments
+HLpipKuh2	119	Q	103-bat codon alignment (HLpipKuh2) has CAA = Gln at 119; the codon is NNN in the 30-species alignment and the six codons after it (120-125) are masked in both; the RefSeq protein lacks residues 119-124, so this call rests on a single codon
